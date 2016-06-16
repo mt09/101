@@ -10,12 +10,12 @@ x = User.new
 x.email = "q@q.com"
 x.password = "qwerasdf"
 x.password_confirmation = "qwerasdf"
-#x.is_admin = true
+x.is_admin = true
 x.save
 
 y = User.new
 y.email = "w@w.com"
 y.password = "qwerasdf"
 y.password_confirmation = "qwerasdf"
-#y.is_admin = false
+y.is_admin = false
 y.save
