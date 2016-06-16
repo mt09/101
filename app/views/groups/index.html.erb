@@ -2,5 +2,6 @@
 <% @groups.each do |group| %>
 	<%= group.title %>
 	<%= group.description %>
+	<%= link_to "edit", edit_group_path(group) %>
 <% end %>
 </h1>

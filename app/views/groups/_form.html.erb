@@ -1,0 +1,10 @@
+<%= simple_form_for @group do |f| %>
+	<div>
+		<%= f.input :title %>
+		<%= f.input :description %>
+	</div>
+	<div>
+		<%= f.button :submit, data: {disable_with: "Submitting..."}, class: "btn btn-default" %>
+		<%= link_to "Cancel", groups_path, class: "btn btn-default" %>
+	</div>
+<% end %>
