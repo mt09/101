@@ -1,0 +1,8 @@
+		<%= simple_form_for [@post.group, @post] do |f| %>
+			<div>
+				<%= f.input :content %>
+			</div>
+			<div>
+				<%= f.button :submit, data: {disable_with: "Submitting..."}, class: "btn btn-default" %>
+			</div>
+		<% end %>
