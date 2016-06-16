@@ -3,6 +3,16 @@ class GroupsController < ApplicationController
 		@groups = Group.all
 	end
 
+	def show
+		@group = Group.find(params[:id])
+	end
+
+	def destroy
+		@group = Group.find(params[:id])
+		@group.destroy
+		redirect_to groups_path
+	end
+
 	def new
 		@group = Group.new
 	end
