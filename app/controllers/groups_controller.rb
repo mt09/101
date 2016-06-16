@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 		@group = Group.new(group_params)
 
 		if @group.save
-			redirect_to groups_path
+			redirect_to groups_path, notice: "COOL"
 		else
 			render :new
 		end
