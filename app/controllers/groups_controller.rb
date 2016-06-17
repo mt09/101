@@ -1,6 +1,28 @@
 class GroupsController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 
+	def join
+		@group = Group.find(params[:id])
+
+		if !current_user.is_member_of?(@group)
+			current_user.join!(@group)
+			redirect_to :back, notice: "Successfully joined."
+		else
+			flash[:warning] = "You're member already."
+		end
+	end
+
+	def quit
+		@group = Group.find(params[:id])
+
+		if current_user.is_member_of?(@group)
+			current_user.quit!(@group)
+			redirect_to :back, notice: "Seec you next time."
+		else
+			flash[:warning] = "Bye."
+		end
+	end
+
 	def index
 		@groups = Group.all
 	end
