@@ -24,8 +24,10 @@
 						<td><%= post.content %></td>
 						<td><%= post.updated_at.to_s(:long) %></td>
 						<td>
-							<%= link_to "edit", edit_group_post_path(post.group, post) %>
-							<%= link_to "remove", group_post_path(post.group, post), method: :delete, data: {confirm: "Sure?"} %>
+							<% if post.editable_by?(current_user) %>
+								<%= link_to "edit", edit_group_post_path(post.group, post) %>
+								<%= link_to "remove", group_post_path(post.group, post), method: :delete, data: {confirm: "Sure?"} %>
+							<% end %>
 						</td>
 					</tr>
 				<% end %> 
