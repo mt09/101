@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
 	before_action :authenticate_user!
-	
+	before_action :find_group
+	before_action :member_required
+
 	def new
-		@group = Group.find(params[:group_id])
 		@post = @group.posts.new
 	end
 
 	def create
-		@group = Group.find(params[:group_id])
 		@post = @group.posts.build(post_params)
 		@post.author = current_user
 
@@ -19,12 +19,10 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-		@group = Group.find(params[:group_id])
 		@post = current_user.posts.find(params[:id])
 	end
 
 	def update
-		@group = Group.find(params[:group_id])
 		@post = current_user.posts.find(params[:id])
 
 		if @post.update(post_params)
@@ -35,7 +33,6 @@ class PostsController < ApplicationController
 	end
 
 	def destroy
-		@group = Group.find(params[:group_id])
 		@post = current_user.posts.find(params[:id])
 		@post.destroy
 		redirect_to group_path(@group, @post)
@@ -45,5 +42,15 @@ class PostsController < ApplicationController
 
 	def post_params
 		params.require(:post).permit(:content)
+	end
+
+	def find_group
+		@group = Group.find(params[:group_id])
+	end
+
+	def member_required
+		if !current_user.is_member_of?(@group)
+			redirect_to group_path(@group), warning: "請先加入群組"
+		end
 	end
 end
