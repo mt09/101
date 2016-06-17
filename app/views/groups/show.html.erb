@@ -7,7 +7,7 @@
 			<% if !current_user.is_member_of?(@group) %>
 				<%= link_to "Join", join_group_path(@group), method: :post, class: "btn btn-info"  %>
 			<% else %>
-				<%= link_to "Quit", quit_group_path(@group), method: :post,class: "btn btn-info"  %>
+				<%= link_to "Quit", quit_group_path(@group), method: :post,class: "btn btn-danger"  %>
 			<% end %>
 		</div>
 
